@@ -368,9 +368,10 @@ function replaceMacrosValues(url, macros) {
   var replacedMacrosUrl = url;
 
   for (var key in macros) {
-    var value = macros[key]; // this will match [${key}] and %%${key}%% and replace it
+    var value = macros[key]; // this will match [${key}] and %%${key}%% and %5B{key}%5D and replace it
 
-    replacedMacrosUrl = replacedMacrosUrl.replace(new RegExp("(?:\\[|%%)(".concat(key, ")(?:\\]|%%)"), 'g'), value);
+    replacedMacrosUrl = replacedMacrosUrl.replace( //eslint-disable-next-line
+    new RegExp("(?:[|%{2}|%5B)(".concat(key, ")(?:]|%{2}|%5D)"), 'g'), value);
   }
 
   return replacedMacrosUrl;
