@@ -45,7 +45,7 @@ function resolveURLTemplates(URLTemplates, macros = {}, options = {}) {
   }
 
   for (const URLTemplateKey in URLArray) {
-    const resolveURL = URLArray[URLTemplateKey];
+    const resolveURL = decodeURI(URLArray[URLTemplateKey]);
 
     if (typeof resolveURL !== 'string') {
       continue;

@@ -36,7 +36,7 @@ const browserConfig = {
   input: 'src/index.js',
   output: {
     name: 'VAST',
-    format: 'umd',
+    format: 'es',
     file: 'dist/vast-client.js',
   },
   plugins: [babelPlugin],

@@ -44,12 +44,19 @@ function get(url, options, cb) {
     return cb(new Error('XHRURLHandler: Cannot go from HTTPS to HTTP.'));
   }
 
+  const urlCredentionalConditions = urlToCheck => {
+    const rutarget = urlToCheck.includes('rutarget.ru');
+    return rutarget;
+  };
+
   try {
     const request = xhr();
 
     request.open('GET', url);
     request.timeout = options.timeout || DEFAULT_TIMEOUT;
-    request.withCredentials = options.withCredentials || false;
+    request.withCredentials = urlCredentionalConditions(url)
+      ? true
+      : options.withCredentials || false;
     request.overrideMimeType && request.overrideMimeType('text/xml');
 
     request.onload = () => handleLoad(request, cb);
