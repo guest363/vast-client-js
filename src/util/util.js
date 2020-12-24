@@ -45,7 +45,7 @@ function resolveURLTemplates(URLTemplates, macros = {}, options = {}) {
   }
 
   for (const URLTemplateKey in URLArray) {
-    const resolveURL = decodeURI(URLArray[URLTemplateKey]);
+    const resolveURL = URLArray[URLTemplateKey];
 
     if (typeof resolveURL !== 'string') {
       continue;
@@ -100,8 +100,7 @@ function replaceMacrosValues(url, macros) {
     const value = macros[key];
     // this will match [${key}] and %%${key}%% and %5B{key}%5D and replace it
     replacedMacrosUrl = replacedMacrosUrl.replace(
-      //eslint-disable-next-line
-      new RegExp(`(?:\[|%{2}|%5B)(${key})(?:\]|%{2}|%5D)`, 'g'),
+      new RegExp(`(?:\\[|%{2}|%5B)(${key})(?:\\]|%{2}|%5D)`, 'g'),
       value
     );
   }

@@ -316,7 +316,7 @@ function resolveURLTemplates(URLTemplates) {
   }
 
   for (var URLTemplateKey in URLArray) {
-    var resolveURL = decodeURI(URLArray[URLTemplateKey]);
+    var resolveURL = URLArray[URLTemplateKey];
 
     if (typeof resolveURL !== 'string') {
       continue;
@@ -374,8 +374,7 @@ function replaceMacrosValues(url, macros) {
   for (var key in macros) {
     var value = macros[key]; // this will match [${key}] and %%${key}%% and %5B{key}%5D and replace it
 
-    replacedMacrosUrl = replacedMacrosUrl.replace( //eslint-disable-next-line
-    new RegExp("(?:[|%{2}|%5B)(".concat(key, ")(?:]|%{2}|%5D)"), 'g'), value);
+    replacedMacrosUrl = replacedMacrosUrl.replace(new RegExp("(?:\\[|%{2}|%5B)(".concat(key, ")(?:\\]|%{2}|%5D)"), 'g'), value);
   }
 
   return replacedMacrosUrl;
